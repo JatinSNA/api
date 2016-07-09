@@ -90,7 +90,7 @@ Even if you use the
 https://gitlab.com/horihiro/osc-client-theta_s/tree/master[entire code sample for osc-client-theta_s that is available on GitLab],
 you will see this error.
 
-image::img/javascript/osc-client-theta-s.png[]
+image::../img/javascript/osc-client-theta-s.png[]
 
 https://github.com/natelevine[Nate Levine] got the node
 module working at the DeveloperWeek Hackathon where he was

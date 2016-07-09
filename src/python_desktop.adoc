@@ -1,7 +1,7 @@
 === Python Desktop
 
 
-image::img/desktop/desktop_app.png[]
+image::../img/desktop/desktop_app.png[]
 This example uses the same Python code from the previous command line
 example and runs it from a GUI.  The example uses http://www.pygame.org/download.shtml[Pygame]
 due to the ease with which a GUI can be built. The application can

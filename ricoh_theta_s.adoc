@@ -37,17 +37,17 @@ include::src/take_picture.adoc[]
 
 include::src/testingWorkflow.adoc[]
 
-include::python_tests.adoc[]
+include::src/python_tests.adoc[]
 
-include::python_desktop.adoc[]
+include::src/python_desktop.adoc[]
 
-include::transfer.adoc[]
+include::src/transfer.adoc[]
 
-include::javascript.adoc[]
+include::src/javascript.adoc[]
 
-include::otherLang.adoc[]
+include::src/otherLang.adoc[]
 
-include::rpi.adoc[]
+include::src/rpi.adoc[]
 
 include::hardware.adoc[]
 

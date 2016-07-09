@@ -8,7 +8,7 @@ In this example, I have it working with the
 https://flirc.tv/[FLIRC] USB dongle to connect a simple IR remote
 to THETA S.
 
-image::img/rpi/rpi.jpg[]
+image::../img/rpi/rpi.jpg[]
 
 This examples opens up a range of possibilities for triggering
 pictures and video with motion, light, and other sensors connected
@@ -19,7 +19,7 @@ Raspberry Pi, you can remove the cables and connect the
 Raspberry Pi to a http://www.adafruit.com/products/1566[battery]. The
 one in the link powered an Pi for 15 hours.
 
-image::img/rpi/flicr.jpg[]
+image::../img/rpi/flicr.jpg[]
 
 I have only tested the Pi with the remote control as a proof of concept
 to make sure it works. I tested taking a picture, starting a video, and
@@ -31,7 +31,7 @@ I have the same GUI displayed from my deskTHETA example.  However,
 you don't need a monitor connected to run the program.  Right now,
 the GUI serves no purpose other than testing from the Pi to the THETA.
 
-image::img/rpi/app.jpg[]
+image::../img/rpi/app.jpg[]
 
 === Screengrabs Over USB in Live Streaming Mode
 
@@ -44,4 +44,4 @@ USB cable.
 I used `fswebcam` to grab dual-fisheye shots and save it to the SD card
 of the Raspberry Pi.
 
-image::img/rpi/screengrab.jpg[]
+image::../img/rpi/screengrab.jpg[]
