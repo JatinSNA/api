@@ -1,0 +1,42 @@
+== Additional Resources
+
+=== API Documentation
+* https://developers.theta360.com/en/docs/v2/api_reference/[RICOH THETA API version 2 reference documentation]
+* https://developers.google.com/streetview/open-spherical-camera/[Google Open Spherical Camera API] -
+RICOH THETA S is OSC v1 compliant
+
+=== Phone Applications
+IMPORTANT: The THETA S requires a new app.  The older app will not work.
+
+==== Official RICOH Apps
+
+* https://play.google.com/store/apps/details?id=com.theta360[Android THETA S application]
+* https://itunes.apple.com/us/app/id1023254741[iOS]
+
+==== Official RICOH SDK
+There's a lot of great sample code in the RICOH THETA SDK.  Download it
+from the link below.  There are different SDKs for the RICOH THETA m15 and the RICOH THETA S.
+The source code of the sample apps is useful.
+
+* https://developers.theta360.com/en/docs/sdk/download.html[RICOH THETA SDK]
+
+==== Third-Party Recommended Viewers
+* https://play.google.com/store/apps/details?id=jp.co.taosoftware.android.sphericalviewer&hl=en[Tao360] for Android
+* https://itunes.apple.com/us/app/kiroru-360/id954157416?mt=8[KIRORU 360 for iOS (not tested)]
+
+
+=== YouTube 360 degree Videos
+* https://www.youtube.com/360[#360Video on YouTube]
+* https://support.google.com/youtube/answer/6178631?hl=en[Upload 360 degree videos to YouTube]
+
+=== Untested Community Viewers
+* https://github.com/akokubo/ThetaViewer[Akokubo ThetaViewer] equirectangular
+projection panorama HTML 5 viewer.  The main source file is
+https://github.com/akokubo/ThetaViewer/blob/master/src/theta-viewer.js[here].
+Example image in viewer is
+http://akokubo.github.io/ThetaViewer/demo1.html[here].
+
+=== Programming Languages
+The HTTP API of the THETA S can be accessed from almost any programming language.
+
+* http://qiita.com/sandinist/items/9c3a77fdf262513ede3d[Article in Japanese] about using the RICOH THETA S API in shell, Ruby, Python, Swift, and C#.

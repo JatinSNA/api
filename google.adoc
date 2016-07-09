@@ -1,0 +1,18 @@
+
+== Google Maps, Photos
+https://www.google.com/intl/en_us/maps/streetview/[Google Street View]
+
+RICOH THETA supports
+https://www.google.com/maps/about/contribute/photosphere/[Google Photo Sphere]
+ XMP.
+You can share and view your spherical images on Google’s service
+(Gallery, Google Maps, Google+, Photos).
+
+=== Maps
+You can share the place you photographed with RICOH THETA
+by posting your spherical images on Google Maps.
+
+=== Google+ and Google Photos
+
+You can share your spherical images with your friends by posting them to Google+.
+ Spherical images posted to Google+ can be rotated and viewed using this app on an Android phone. Also, when you save your spherical images on your smart phone, they will be synced with Google Photos using Auto Backup, making it easy to see them on Google+.

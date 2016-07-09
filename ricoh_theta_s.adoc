@@ -1,0 +1,64 @@
+= http://theta360.guide[Unofficial Guides]
+:icons: font
+:toc: right
+:toclevels: 1
+:toc-title: Contents
+:sectnums:
+
+
+++++
+<script>
+// page-specific analytics.
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-73311422-2', 'auto');
+ga('send', 'pageview');
+ga('set', 'contentGroup1', 'All RICOH');
+</script>
+++++
+
+image::img/api_guide_logo.png[THETA DEVELOPERS UNOFFICIAL API GUIDE]
+
+
+Send comments and corrections to <ricohtheta360@oppkey.com>
+
+This is an unofficial, community-generated guide to using the RICOH THETA S API.
+This is not authorized by RICOH and is based on publicly available information.
+
+== http://theta360.guide/contest/[$45,000 THETA Dev Contest]
+
+include::src/resources.adoc[]
+
+include::src/testCommands.adoc[]
+
+include::src/take_picture.adoc[]
+
+include::src/testingWorkflow.adoc[]
+
+include::python_tests.adoc[]
+
+include::python_desktop.adoc[]
+
+include::transfer.adoc[]
+
+include::javascript.adoc[]
+
+include::otherLang.adoc[]
+
+include::rpi.adoc[]
+
+include::hardware.adoc[]
+
+include::network.adoc[]
+
+include::usb.adoc[]
+
+include::resources.adoc[]
+
+include::hackathon_tips.adoc[]
+
+include::thetapylib.adoc[]
+
+include::nextsteps.adoc[]
