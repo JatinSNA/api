@@ -13,7 +13,7 @@
 
 == Using the THETA API Over USB
 
-image::img/usb/camera-usb-ready.png[role="thumb" title="Ready for USB Control - Power on and unmounted"]
+image::../img/usb/camera-usb-ready.png[role="thumb" title="Ready for USB Control - Power on and unmounted"]
 
 Developers can access the RICOH
 link:https://developers.theta360.com/en/docs/v2/usb_reference/[THETA API over USB].
@@ -64,7 +64,7 @@ also installs `ptpcam`.
 
 TIP: With $3 for common nuts and a bolt, you can attach the THETA to any tripod or attach to another machine for industrial use. Use 1/4 inch, 20 TPI parts
 
-image::img/usb/usb-tripod.jpg[role="thumb" title="1/4 inch, 20 TPI bolt adapter"]
+image::../img/usb/usb-tripod.jpg[role="thumb" title="1/4 inch, 20 TPI bolt adapter"]
 
 Here's more information on building a
 link:http://lists.theta360.guide/t/3-tripod-modification-for-theta-live-streaming-usb-cable/64?u=codetricity[camera attachment adapter] that works with the USB cable plugged in.
@@ -196,7 +196,7 @@ Verify that the change was saved:
 
 The blue light on the THETA now shows a video icon.
 
-image::img/usb/video-light.png[role="thumb" title="Using USB to set mode"]
+image::../img/usb/video-light.png[role="thumb" title="Using USB to set mode"]
 
 At this stage, I boiled a pot of tea and left the camera on. When I came back, it had turned off.
 
@@ -251,7 +251,7 @@ You can look at the image in your Linux file browser just to verify that
 the image was downloaded. In this picture, I have the THETA
 lying on it's side on my desk.
 
-image::img/usb/image-sample.png[role="thumb" title="Sample Image Downloaded with USB API"]
+image::../img/usb/image-sample.png[role="thumb" title="Sample Image Downloaded with USB API"]
 
 It's not a very nice picture, so I'll delete it.
 
@@ -294,7 +294,7 @@ Download the file to my local computer
 
 Verify that the download worked.
 
-image::img/usb/sample.jpg[role="thumb" title="Sample Image of My Rig Downloaded with USB API"]
+image::../img/usb/sample.jpg[role="thumb" title="Sample Image of My Rig Downloaded with USB API"]
 
 You can now see my boss Antec case for my overclocked system and the top of
 my overclocked and watercooled Linux test rig decorated with
@@ -313,7 +313,7 @@ TIP: I have two network interfaces in my computer, I can access the THETA over W
 
 TIP: I use DHC to easily set the options. DHC is a tool to send, save, and organize HTTP requests. As I test the THETA frequently.
 
-image::img/usb/dhc.png[role="thumb" title="Use the free DHC Chrome App to save HTTP tests"]
+image::../img/usb/dhc.png[role="thumb" title="Use the free DHC Chrome App to save HTTP tests"]
 
 If the image is difficult to see, the relevant POST body is
 
@@ -453,7 +453,7 @@ I realized that the storage ID was reversed.
 
 Focus on the numbers in places 5-8 and reverse the order.
 
-image::img/usb/getstorageid.png[role="thumb" title="getting the storage IDs in the THETA"]
+image::../img/usb/getstorageid.png[role="thumb" title="getting the storage IDs in the THETA"]
 
 ==== Get Object Handles
 

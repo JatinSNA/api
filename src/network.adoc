@@ -43,7 +43,7 @@ adapter less than a foot from my THETA for testing. There are many WiFi
 adapters at the $10 price point. If you're going
 to develop apps for the THETA, it's a good investment.
 
-image::img/network/wifi_dongle.png[role="thumb" title="Example of a cheap WiFi adapter on Amazon.com that I use on RPi and Win 10"]
+image::../img/network/wifi_dongle.png[role="thumb" title="Example of a cheap WiFi adapter on Amazon.com that I use on RPi and Win 10"]
 
 From the Windows 10 machine, I can connect to both the THETA and the
 Internet. If I power the THETA from a 1.5A power source such as a
@@ -54,7 +54,7 @@ host, I set the VirtualBox Network Adapter with a single NAT adapter. With this
 configuration, I can access both the Internet and the THETA
 from within the guest VM.
 
-image::img/tools/dev_environment.png[role="thumb" title="Accessing the THETA and Internet Simultaneously"]
+image::../img/tools/dev_environment.png[role="thumb" title="Accessing the THETA and Internet Simultaneously"]
 
 Inside of the Linux VM, I am getting good Internet access to GitHub over the
 Internet and to the THETA, which I can test using `curl`.
@@ -98,14 +98,14 @@ or plug a WiFi adapter into the USB port of your tablet.
 This is a picture of a self-contained Raspberry Pi unit powered by a
 rechargeable battery.
 
-image::img/rpi/rpi_box.png[role="thumb" title="Prototype used car marketing unit with dual WiFi and battery power"]
+image::../img/rpi/rpi_box.png[role="thumb" title="Prototype used car marketing unit with dual WiFi and battery power"]
 
 The Raspberry Pi is completely portable and can connect to the Internet and the
 THETA at the same time. The interface is a touchscreen.
 
-image::img/rpi/rpi_front.png[role="thumb" title="Touchscreen for Raspberry Pi and THETA"]
+image::../img/rpi/rpi_front.png[role="thumb" title="Touchscreen for Raspberry Pi and THETA"]
 
 This is an updated version of the system with a
 RPi touch interface built with Pygame.
 
-image::img/rpi/driver_eye.png[role="thumb" title="DriverEye - Used Car Marketing System Prototype"]
+image::../img/rpi/driver_eye.png[role="thumb" title="DriverEye - Used Car Marketing System Prototype"]

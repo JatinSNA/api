@@ -19,7 +19,7 @@ ga('set', 'contentGroup1', 'All RICOH');
 </script>
 ++++
 
-image::img/api_guide_logo.png[THETA DEVELOPERS UNOFFICIAL API GUIDE]
+image::../img/api_guide_logo.png[THETA DEVELOPERS UNOFFICIAL API GUIDE]
 
 
 Send comments and corrections to <ricohtheta360@oppkey.com>
@@ -29,25 +29,25 @@ This is not authorized by RICOH and is based on publicly available information.
 
 == http://theta360.guide/contest/[$45,000 THETA Dev Contest]
 
-include::src/resources.adoc[]
+include::resources.adoc[]
 
-include::src/testCommands.adoc[]
+include::testCommands.adoc[]
 
-include::src/take_picture.adoc[]
+include::take_picture.adoc[]
 
-include::src/testingWorkflow.adoc[]
+include::testingWorkflow.adoc[]
 
-include::src/python_tests.adoc[]
+include::python_tests.adoc[]
 
-include::src/python_desktop.adoc[]
+include::python_desktop.adoc[]
 
-include::src/transfer.adoc[]
+include::transfer.adoc[]
 
-include::src/javascript.adoc[]
+include::javascript.adoc[]
 
-include::src/otherLang.adoc[]
+include::otherLang.adoc[]
 
-include::src/rpi.adoc[]
+include::rpi.adoc[]
 
 include::hardware.adoc[]
 
