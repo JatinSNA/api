@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.4">
-<title>thetapylib</title>
+<title>Python</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
@@ -747,230 +747,237 @@ p { margin-bottom: 1.25rem; }
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_thetapylib">thetapylib</h2>
+<h2 id="_python">Python</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The sample Python library is included purely as an example of some of the
-core commands that the THETA API v2 provides.  It is not intended for
-use in applications.</p>
+<p><a href="https://github.com/codetricity/theta-s-api-tests">Sample code</a>
+is available on GitHub. Additional Python examples are also available
+ from the community. A better <a href="https://github.com/hpd/OpenSphericalCamera">OSC Python library is available
+ from Haarm-Pieter Duiker</a>.
+<a href="https://github.com/theta360developers/python-download-rossgoderer">Ulrich Rossgoderer wrote an example to download media from the command
+line</a>.</p>
 </div>
 <div class="paragraph">
-<p>Documentation is included below so that you can quickly get an overview
-of using some of the
-commands before you build your own library.</p>
+<p>I am using the Python <a href="http://docs.python-requests.org/en/latest/"><code>requests</code></a>
+library for <code>HTTP</code> requests.  While you can use
+<a href="https://docs.python.org/2/howto/urllib2.html"><code>urllib2</code></a>,
+<code>requests</code> is easier for mere mortals.  Although I&#8217;m doing the testing
+on Windows 10, I am running the python scripts in a VirtualBox VM with default
+<code>NAT</code> network settings. The Python program is able to connect from the VM through
+the Windows 10 WiFi adapter and to the THETA S. I&#8217;m assuming that Python
+will work fine on Windows 10, but it&#8217;s easier for me to use Linux.</p>
+</div>
+<div class="paragraph">
+<p>To test with Python, I first started by simply writing out individual
+commands in the script, similar to browser testing.  I then
+moved the THETA API v2 commands into a library and wrote a command line
+tool to accept arguments and test each command.</p>
+</div>
+<div class="paragraph">
+<p>The first step to learn the API is to grab some basic information
+from the camera and print it to your console.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>thetapylib
-/home/ricoh/Development/viewer/thetapylib.py</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example library for RICOH THETA S hacking with Python.  The new
-API is compliant with the Open Spherical Camera specification.
-This is intended to show how the THETA S API works.  It is
-not intended for use in your program.  There is no error
-checking and this example library only handles a handful
-of commands.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>There are three example programs that use this library.
-At the top of your Python script, use</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>from thetapylib import *</pre>
+<pre>import requests, json, pprint</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>After you import the library, you can use the commands like this:</pre>
+<pre>def request(url_request):
+    url_base = "http://192.168.1.1/osc/"
+    url = url_base + url_request
+    return url</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>state()</pre>
+<pre>def basic_info():
+    protocols = [
+        "state",
+        "info"
+    ]
+    for protocol in protocols:
+        print(60 * "=")
+        print(protocol + " - Testing RICOH THETA API v2\n")
+        url = request(protocol)
+        if protocol == "info":
+            req = requests.get(url)
+        else:
+            req = requests.post(url)
+        pprint.pprint(req.json())</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>That will return the state of the camera, which is great to
-get the sessionId.</pre>
+<pre>def main():
+  basic_info()</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>You can also get the sessionId when you start a new session:</pre>
+<pre>main()</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is what I get:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ricoh@odapolis:~/Development/viewer$ python theta-python-test.py
+============================================================
+state - Testing RICOH THETA API v2</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>startSession()</pre>
+<pre>{u'fingerprint': u'FIG_0002',
+ u'state': {u'_batteryState': u'disconnect',
+            u'_captureStatus': u'idle',
+            u'_latestFileUri': u'',
+            u'_recordableTime': 0,
+            u'_recordedTime': 0,
+            u'batteryLevel': 0.67,
+            u'sessionId': u'SID_0028',
+            u'storageChanged': False}}
+============================================================
+info - Testing RICOH THETA API v2</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>In fact, the startSession() function will return the
-sessionId.</pre>
+<pre>{u'api': [u'/osc/info',
+          u'/osc/state',
+          u'/osc/checkForUpdates',
+          u'/osc/commands/execute',
+          u'/osc/commands/status'],
+ u'endpoints': {u'httpPort': 80, u'httpUpdatesPort': 80},
+ u'firmwareVersion': u'01.11',
+ u'gps': False,
+ u'gyro': False,
+ u'manufacturer': u'RICOH',
+ u'model': u'RICOH THETA S',
+ u'serialNumber': u'00001221',
+ u'supportUrl': u'https://theta360.com/en/support/',
+ u'uptime': 3081}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, we want to take a picture. We&#8217;ll take a still image in this example,
+but it&#8217;s almost as easy to start a video capture and end it.</p>
+</div>
+<div class="paragraph">
+<p>First you need to start a session and
+grab the session ID (SID).</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def startSession():
+    url = request("commands/execute")
+    body = json.dumps({"name": "camera.startSession",
+         "parameters": {}
+         })
+    req = requests.post(url, data=body)
+    response = req.json()
+    print(60 * "=")
+    print("startSession - Testing RICOH THETA API v2\n")
+    pprint.pprint(response)
+    sid = (response["results"]["sessionId"])
+    print sid
+    return sid</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point I still think it&#8217;s cool, to output the response to the console.
+Also, it will give you a better idea of how to pull the <code>sessionId</code> or
+<code>timeout</code> values into your program.  In the example above, I grab
+the response from the request.  I then get the <code>results</code> key from the
+dictionary.  The <code>results</code> value is another dictionary.  I use the
+key <code>sessionId</code> to grab the value I need to take a picture.</p>
+</div>
+<div class="paragraph">
+<p>My <code>main()</code> function now looks like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def main():
+    basic_info()
+    sid = startSession() #grab session ID</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of to the console looks like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>startSession - Testing RICOH THETA API v2</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>Example use of the library with Pygame to detect the
-button press.</pre>
+<pre>{u'name': u'camera.startSession',
+ u'results': {u'sessionId': u'SID_0029', u'timeout': 180},
+ u'state': u'done'}
+SID_0029</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, it&#8217;s the exciting part.  We can take the picture!</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def takePicture(sid):
+    url = request("commands/execute")
+    body = json.dumps({"name": "camera.takePicture",
+         "parameters": {
+            "sessionId": sid
+         }
+         })
+    req = requests.post(url, data=body)
+    response = req.json()
+    print(60 * "=")
+    print("takePicture - Testing RICOH THETA API v2\n")
+    pprint.pprint(response)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add the function to <code>main()</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def main():
+    basic_info()
+    sid = startSession() #grab session ID
+    takePicture(sid) #still image</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run it and celebrate!</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>============================================================
+takePicture - Testing RICOH THETA API v2</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>if event.type == pygame.MOUSEBUTTONDOWN:
-    mouse_pos = pygame.mouse.get_pos()
-    if pictureButton.collidepoint(mouse_pos):
-        sid = startSession()
-        takePicture(sid)
-    if captureStartButton.collidepoint(mouse_pos):
-        sid = startSession()
-        startCapture(sid)
-    if captureStopButton.collidepoint(mouse_pos):
-        stopCapture(sid)</pre>
+<pre>{u'id': u'1',
+ u'name': u'camera.takePicture',
+ u'progress': {u'completion': 0.0},
+ u'state': u'inProgress'}</pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of library from the command line:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if sys.argv[1] == "startCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py startCapture SID_000X")
-        print("Use 'state' to get sessionId")</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    else:
-        sid = sys.argv[2]
-        response = startCapture(sid)
-        pprint.pprint(response)
-elif sys.argv[1] == "stopCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py stopCapture SID_000X")
-        print("Use 'state' to get sessionId")
-    else:
-        sid = sys.argv[2]
-        response = stopCapture(sid)
-        pprint.pprint(response)</pre>
-</div>
-</div>
-<hr>
-<div class="literalblock">
-<div class="content">
-<pre>Functions</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>getImage(fileUri, imageType='image')
-    Transfer the file from the camera to computer and save the
-    binary data to local storage.  This works, but is clunky.
-    There are easier ways to do this. The __type parameter
-    can be set to "thumb" for a thumbnail or "image" for the
-    full-size image.  The default is "image".</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>info()
-    Get basic information ont he camera.  Note that this is a GET call
-    and not a POST.  Most of the calls are POST.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>latestFileUri()
-    This will only work if you've just taken a picture.  The state
-    will include the attribute latestFileUri.  You need this to
-    transfer the file from the camera to your computer or phone.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>listAll(entryCount=3, detail=False, sortType='newest')
-    entryCount:
-            Integer     No. of still images and video files
-                        to be acquired
-    detail:
-            Boolean     (Optional)  Whether or not file details are
-                        acquired true is acquired by default.
-                        Only values that can be acquired
-                        when false is specified are "name", "uri",
-                        "size" and "dateTime"
-    sort:
-            String      (Optional) Specify the sort order
-                        newest (dateTime descending order)/ oldest
-                        (dateTime ascending order)
-                        Default is newest</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>request(url_request)
-    Generate the URI to send to the THETA S.  The THETA IP address is
-    192.168.1.1
-    All calls start with /osc/</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startCapture(sid)
-    Begin video capture if the captureMode is _video.  If the
-    captureMode is set to image, the camera will take multiple
-    still images.  The captureMode can be set in the options.
-    Note that this will not work with streaming video using the
-    HDMI or USB cable.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()
-    Start a new session.  Grab the sessionId number and
-    return it.
-    You'll need the sessionId to take a video or image.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()
-    Get the state of the camera, which will include the sessionsId and also the
-    latestFileUri if you've just taken a picture.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>stopCapture(sid)
-    Stop video capture.  If in image mode, will stop
-    automatic image taking.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>takePicture(sid)
-    Take a still image.  The sessionId is either taken from
-    startSession or from state.  You can change the mode
-    from video to image with captureMode in the options.</pre>
-</div>
+<div class="paragraph">
+<p>In the next few sections, I&#8217;ll show how easy it is to build
+an interface to access the Python library we&#8217;re building.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-07-09 15:55:11 PDT
+Last updated 2016-07-09 15:58:15 PDT
 </div>
 </div>
 </body>

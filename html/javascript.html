@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.4">
-<title>thetapylib</title>
+<title>JavaScript</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
@@ -747,222 +747,249 @@ p { margin-bottom: 1.25rem; }
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_thetapylib">thetapylib</h2>
+<h2 id="_javascript">JavaScript</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The sample Python library is included purely as an example of some of the
-core commands that the THETA API v2 provides.  It is not intended for
-use in applications.</p>
+<p>Normally, JavaScript within a web browser will not be able to access the
+THETA due to security restrictions. However, Node.js is able to communicate
+with the camera, so that’s what I recommend using.</p>
 </div>
 <div class="paragraph">
-<p>Documentation is included below so that you can quickly get an overview
-of using some of the
-commands before you build your own library.</p>
+<p>In addition to server-side applications,
+people have successfully built applications using Cordova and
+Titanium. At the DeveloperWeek Hackathon, Thuong Ho showed a nice
+example using
+<a href="http://ionicframework.com/">Ionic</a>
+and
+<a href="http://browserify.org/">Browserify</a>.
+Browserify lets you require('modules') in the browser by bundling
+up all of your dependencies. He used Ionic to get the
+<a href="https://angularjs.org/">AngularJS</a> components in his mobile application and
+was able to take a picture and download the code using the Node.js example code
+below.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Running JavaScript in a browser directly will result in an error when you access the camera. You must use something like Node.js or another way of running the code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start with the easiest example, Node.js, from the command line.</p>
+</div>
+<div class="paragraph">
+<p>I <a href="https://nodejs.org/en/">downloaded Node.js</a> for Windows.
+Then, I followed a
+blog post by Satoru Yamada who describes
+<a href="http://theta360developers.github.io/blog/javascript/2015/12/17/theta-s-nodejs.html">how to
+access the THETA camera with JavaScript</a>.
+After copying and pasting his code into a text editor,
+titling the program <code>main.js</code> and running it using the
+<code>node</code> command prompt” I ran into a problem with the <code>osc-client</code>.</p>
+</div>
+<div class="paragraph">
+<p>This was simply remedied by downloading the
+<a href="https://www.npmjs.com/package/osc-client"><code>osc-client</code></a> using NPM.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>thetapylib
-/home/ricoh/Development/viewer/thetapylib.py</pre>
+<pre>npm install osc-client --save</pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>Example library for RICOH THETA S hacking with Python.  The new
-API is compliant with the Open Spherical Camera specification.
-This is intended to show how the THETA S API works.  It is
-not intended for use in your program.  There is no error
-checking and this example library only handles a handful
-of commands.</pre>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Use --save
+</td>
+</tr>
+</table>
 </div>
+<div class="paragraph">
+<p>After installing <code>osc-client</code>, I tried running the program at
+the command prompt again.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>There are three example programs that use this library.
-At the top of your Python script, use</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>from thetapylib import *</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>After you import the library, you can use the commands like this:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()</pre>
-</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Connect to the camera over WiFi first
+</td>
+</tr>
+</table>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>That will return the state of the camera, which is great to
-get the sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>You can also get the sessionId when you start a new session:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>In fact, the startSession() function will return the
-sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of the library with Pygame to detect the
-button press.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if event.type == pygame.MOUSEBUTTONDOWN:
-    mouse_pos = pygame.mouse.get_pos()
-    if pictureButton.collidepoint(mouse_pos):
-        sid = startSession()
-        takePicture(sid)
-    if captureStartButton.collidepoint(mouse_pos):
-        sid = startSession()
-        startCapture(sid)
-    if captureStopButton.collidepoint(mouse_pos):
-        stopCapture(sid)</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of library from the command line:</pre>
+<pre>var fs = require('fs');
+var OscClientClass = require('osc-client').OscClient;</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>if sys.argv[1] == "startCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py startCapture SID_000X")
-        print("Use 'state' to get sessionId")</pre>
+<pre>var domain = '192.168.1.1';
+var port = '80';
+var client = new OscClientClass(domain, port);
+var sessionId;
+var filename;</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>    else:
-        sid = sys.argv[2]
-        response = startCapture(sid)
-        pprint.pprint(response)
-elif sys.argv[1] == "stopCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py stopCapture SID_000X")
-        print("Use 'state' to get sessionId")
-    else:
-        sid = sys.argv[2]
-        response = stopCapture(sid)
-        pprint.pprint(response)</pre>
-</div>
-</div>
-<hr>
-<div class="literalblock">
-<div class="content">
-<pre>Functions</pre>
+<pre>client.startSession().then(function(res){
+  sessionId = res.body.results.sessionId;
+  return client.takePicture(sessionId);
+  })</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>getImage(fileUri, imageType='image')
-    Transfer the file from the camera to computer and save the
-    binary data to local storage.  This works, but is clunky.
-    There are easier ways to do this. The __type parameter
-    can be set to "thumb" for a thumbnail or "image" for the
-    full-size image.  The default is "image".</pre>
+<pre>.then(function (res) {
+  var pictureUri = res.body.results.fileUri;
+  console.log('pictureUri :%s',pictureUri);</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>info()
-    Get basic information ont he camera.  Note that this is a GET call
-    and not a POST.  Most of the calls are POST.</pre>
+<pre>  var path = pictureUri.split('/');
+  filename = path.pop();
+  return client.getImage(pictureUri);
+})
+.then(function(res){
+  var imgData = res.body;
+  fs.writeFile(filename,imgData);
+  return client.closeSession(sessionId);
+});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If everything goes well then the program will tell the camera to
+take a picture, then save the newly created picture in the directory where
+you executed the command. The file is immediately transferred to the computer.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Organzing a <a href="https://github.com/theta360developers/javascript-api-samples">github repository of JavaScript API examples</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you want to take videos there is an additional package that needs to be
+installed. A community member has created an add on to the osc-client
+called <a href="https://www.npmjs.com/package/osc-client-theta_s">osc-client-theta_s</a>
+that allows video capture and download. His code is included in the same link.</p>
+</div>
+<div class="paragraph">
+<p>I ran into a series of problems with his code. First I had to download a
+series of modules (superagent, debug, qs, osc-client-theta_s)
+using NPM (which can be found by simply typing in the “find packages”
+  search bar). Then <code>ThetaSOscClient</code> returned as undefined.</p>
+</div>
+<div class="paragraph">
+<p>Even if you use the
+<a href="https://gitlab.com/horihiro/osc-client-theta_s/tree/master">entire code sample for osc-client-theta_s that is available on GitLab</a>,
+you will see this error.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../img/javascript/osc-client-theta-s.png" alt="osc client theta s">
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/natelevine">Nate Levine</a> got the node
+module working at the DeveloperWeek Hackathon where he was
+able to successfully take a video using the osc-client-theta_s module and
+download it to his local computer. He mentioned that the example code
+from horihoro doesn&#8217;t work. However, the module does work and his team
+won the THETA API hackathon prize at the hackathon. They took 2nd place
+overall out of 120 teams.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a code snippet portion related to 360 video download using
+node and the THETA S API. This is from
+<a href="https://github.com/natelevine/Gauger">Nate&#8217;s award-winning code</a>. :-)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>var fs = require('fs');
+var ThetaSOscClient = require('osc-client-theta_s').ThetaSOscClient;</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>latestFileUri()
-    This will only work if you've just taken a picture.  The state
-    will include the attribute latestFileUri.  You need this to
-    transfer the file from the camera to your computer or phone.</pre>
+<pre>var domain = '192.168.1.1';
+var port = '80';
+var thetaClient = new ThetaSOscClient(domain, port);
+var sessionId;
+var fileName;</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>listAll(entryCount=3, detail=False, sortType='newest')
-    entryCount:
-            Integer     No. of still images and video files
-                        to be acquired
-    detail:
-            Boolean     (Optional)  Whether or not file details are
-                        acquired true is acquired by default.
-                        Only values that can be acquired
-                        when false is specified are "name", "uri",
-                        "size" and "dateTime"
-    sort:
-            String      (Optional) Specify the sort order
-                        newest (dateTime descending order)/ oldest
-                        (dateTime ascending order)
-                        Default is newest</pre>
+<pre>thetaClient.startSession().then(function (res) {
+  //Grab the session id
+  sessionId = res.body.results.sessionId;
+  return thetaClient.setOptions(sessionId, {captureMode:"_video"})
+})
+.then(function (res) {
+  console.log('starting capture');
+  return thetaClient.startCapture(sessionId);
+})
+.catch(function (error) {
+  console.log(error);
+});</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>request(url_request)
-    Generate the URI to send to the THETA S.  The THETA IP address is
-    192.168.1.1
-    All calls start with /osc/</pre>
+<pre>// Stop capturing after a certain interval in ms
+var interval = 5000;</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>startCapture(sid)
-    Begin video capture if the captureMode is _video.  If the
-    captureMode is set to image, the camera will take multiple
-    still images.  The captureMode can be set in the options.
-    Note that this will not work with streaming video using the
-    HDMI or USB cable.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()
-    Start a new session.  Grab the sessionId number and
-    return it.
-    You'll need the sessionId to take a video or image.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()
-    Get the state of the camera, which will include the sessionsId and also the
-    latestFileUri if you've just taken a picture.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>stopCapture(sid)
-    Stop video capture.  If in image mode, will stop
-    automatic image taking.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>takePicture(sid)
-    Take a still image.  The sessionId is either taken from
-    startSession or from state.  You can change the mode
-    from video to image with captureMode in the options.</pre>
+<pre>setTimeout(function () {
+  console.log('stopping capture');
+  thetaClient.stopCapture(sessionId)
+  .then(function (res) {
+    console.log('stopped capture, writing file');
+    return thetaClient.listAll({entryCount:1, sort:"newest"});
+  })
+  // Get the filename and most recently recorded video uri
+  .then(function (res) {
+    fileName = res.body.results.entries[0].name;
+    console.log(fileName);
+    return thetaClient.getVideo(res.body.results.entries[0].uri, "full");
+  })
+  // Write to disk
+  .then(function (res) {
+    fs.writeFile(fileName, res.body);
+  })
+  .then(function (err) {
+    console.log('closing the session');
+    return thetaClient.closeSession(sessionId);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}, interval);</pre>
 </div>
 </div>
 </div>
@@ -970,7 +997,7 @@ elif sys.argv[1] == "stopCapture":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-07-09 15:55:11 PDT
+Last updated 2016-07-09 16:02:44 PDT
 </div>
 </div>
 </body>

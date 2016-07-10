@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.4">
-<title>thetapylib</title>
+<title>Taking Pictures</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
@@ -747,222 +747,92 @@ p { margin-bottom: 1.25rem; }
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_thetapylib">thetapylib</h2>
+<h2 id="_taking_pictures">Taking Pictures</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The sample Python library is included purely as an example of some of the
-core commands that the THETA API v2 provides.  It is not intended for
-use in applications.</p>
+<p>Start the session.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>192.168.1.1/osc/commands/execute</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{
+  "name": "camera.startSession",
+  "parameters": {}
+}</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Documentation is included below so that you can quickly get an overview
-of using some of the
-commands before you build your own library.</p>
+<p>Grab the <code>sessionId</code> and take the picture.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>thetapylib
-/home/ricoh/Development/viewer/thetapylib.py</pre>
+<pre>{
+  "name": "camera.takePicture",
+  "parameters": {
+  	"sessionId": "SID_0001"
+  }
+}</pre>
 </div>
 </div>
-<div class="literalblock">
+<div class="paragraph">
+<p>The camera will beep.</p>
+</div>
+<div class="paragraph">
+<p>At this point, you can grab the image with the API. However,
+it will be a stream of binary data.  To convert this into
+a something like a jpg that can displayed on the screen, you&#8217;ll
+need to get the stream, convert it, then display the image to your
+screen and allow user interaction with the image.</p>
+</div>
+<div class="paragraph">
+<p>To test whether you&#8217;ve saved the image and to get the great
+satisfaction of seeing your image, you can also check out the
+image with your phone using the THETA S app.</p>
+</div>
+<div class="paragraph">
+<p>First disconnect your computer from the THETA S WiFi hotspot, then connect
+the phone to the camera.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+The THETA S can only connect to one wireless device at a time.
+You can connect your laptop or your phone, but not both at the same
+time.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre>Example library for RICOH THETA S hacking with Python.  The new
-API is compliant with the Open Spherical Camera specification.
-This is intended to show how the THETA S API works.  It is
-not intended for use in your program.  There is no error
-checking and this example library only handles a handful
-of commands.</pre>
+<img src="../img/ricoh_theta_app.png" alt="ricoh theta app">
 </div>
 </div>
-<div class="literalblock">
+<div class="paragraph">
+<p>Select <strong>Camera</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Select the thumbnail.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre>There are three example programs that use this library.
-At the top of your Python script, use</pre>
+<img src="../img/select.png" alt="select">
 </div>
 </div>
-<div class="literalblock">
+<div class="paragraph">
+<p>The image can be rotated.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre>from thetapylib import *</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>After you import the library, you can use the commands like this:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>That will return the state of the camera, which is great to
-get the sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>You can also get the sessionId when you start a new session:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>In fact, the startSession() function will return the
-sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of the library with Pygame to detect the
-button press.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if event.type == pygame.MOUSEBUTTONDOWN:
-    mouse_pos = pygame.mouse.get_pos()
-    if pictureButton.collidepoint(mouse_pos):
-        sid = startSession()
-        takePicture(sid)
-    if captureStartButton.collidepoint(mouse_pos):
-        sid = startSession()
-        startCapture(sid)
-    if captureStopButton.collidepoint(mouse_pos):
-        stopCapture(sid)</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of library from the command line:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if sys.argv[1] == "startCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py startCapture SID_000X")
-        print("Use 'state' to get sessionId")</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    else:
-        sid = sys.argv[2]
-        response = startCapture(sid)
-        pprint.pprint(response)
-elif sys.argv[1] == "stopCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py stopCapture SID_000X")
-        print("Use 'state' to get sessionId")
-    else:
-        sid = sys.argv[2]
-        response = stopCapture(sid)
-        pprint.pprint(response)</pre>
-</div>
-</div>
-<hr>
-<div class="literalblock">
-<div class="content">
-<pre>Functions</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>getImage(fileUri, imageType='image')
-    Transfer the file from the camera to computer and save the
-    binary data to local storage.  This works, but is clunky.
-    There are easier ways to do this. The __type parameter
-    can be set to "thumb" for a thumbnail or "image" for the
-    full-size image.  The default is "image".</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>info()
-    Get basic information ont he camera.  Note that this is a GET call
-    and not a POST.  Most of the calls are POST.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>latestFileUri()
-    This will only work if you've just taken a picture.  The state
-    will include the attribute latestFileUri.  You need this to
-    transfer the file from the camera to your computer or phone.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>listAll(entryCount=3, detail=False, sortType='newest')
-    entryCount:
-            Integer     No. of still images and video files
-                        to be acquired
-    detail:
-            Boolean     (Optional)  Whether or not file details are
-                        acquired true is acquired by default.
-                        Only values that can be acquired
-                        when false is specified are "name", "uri",
-                        "size" and "dateTime"
-    sort:
-            String      (Optional) Specify the sort order
-                        newest (dateTime descending order)/ oldest
-                        (dateTime ascending order)
-                        Default is newest</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>request(url_request)
-    Generate the URI to send to the THETA S.  The THETA IP address is
-    192.168.1.1
-    All calls start with /osc/</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startCapture(sid)
-    Begin video capture if the captureMode is _video.  If the
-    captureMode is set to image, the camera will take multiple
-    still images.  The captureMode can be set in the options.
-    Note that this will not work with streaming video using the
-    HDMI or USB cable.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()
-    Start a new session.  Grab the sessionId number and
-    return it.
-    You'll need the sessionId to take a video or image.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()
-    Get the state of the camera, which will include the sessionsId and also the
-    latestFileUri if you've just taken a picture.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>stopCapture(sid)
-    Stop video capture.  If in image mode, will stop
-    automatic image taking.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>takePicture(sid)
-    Take a still image.  The sessionId is either taken from
-    startSession or from state.  You can change the mode
-    from video to image with captureMode in the options.</pre>
+<img src="../img/beach.png" alt="beach">
 </div>
 </div>
 </div>

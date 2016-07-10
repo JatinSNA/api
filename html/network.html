@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.4">
-<title>thetapylib</title>
+<title>Network</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
@@ -747,222 +747,179 @@ p { margin-bottom: 1.25rem; }
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_thetapylib">thetapylib</h2>
+<h2 id="_network">Network</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The sample Python library is included purely as an example of some of the
-core commands that the THETA API v2 provides.  It is not intended for
-use in applications.</p>
+<p>If you&#8217;re connected to the THETA with WiFi, how do you
+connect to the Internet at the same time?</p>
+</div>
+<div class="sect2">
+<h3 id="_desktop_and_development_environment">Desktop and Development Environment</h3>
+<div class="paragraph">
+<p>The THETA S is always at <code>192.168.1.1</code>. You can&#8217;t change the IP address.
+In my primary test environment, my Internet router from ATT is
+<code>192.168.1.254</code>. Thus, I can connect to the THETA with a USB WiFi
+adapter and to the Internet with Ethernet.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+If your WiFi router is at 192.168.1.1, then you will need to change it.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Documentation is included below so that you can quickly get an overview
-of using some of the
-commands before you build your own library.</p>
+<p>If you don&#8217;t know the IP address of your gateway, you can use <code>ipconfig</code>
+on Windows or <code>ifconfig</code> on Linux.</p>
+</div>
+<div class="paragraph">
+<p>This is what I see on Windows:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>thetapylib
-/home/ricoh/Development/viewer/thetapylib.py</pre>
+<pre>C:\Users\Craig&gt;ipconfig
+Windows IP Configuration
+Ethernet adapter Ethernet:
+   Connection-specific DNS Suffix  . : attlocal.net
+   IPv4 Address. . . . . . . . . . . : 192.168.1.64
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.1.254</pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>Example library for RICOH THETA S hacking with Python.  The new
-API is compliant with the Open Spherical Camera specification.
-This is intended to show how the THETA S API works.  It is
-not intended for use in your program.  There is no error
-checking and this example library only handles a handful
-of commands.</pre>
+<div class="paragraph">
+<p>I actually have more IPv6 info, but as we&#8217;re not using IPv6 addresses
+in this example, I just included the IPv4 (192.x.x.x) information.</p>
 </div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>There are three example programs that use this library.
-At the top of your Python script, use</pre>
-</div>
+<div class="paragraph">
+<p>On Windows, the connection from the desktop Windows machine to the
+THETA looks like this:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>from thetapylib import *</pre>
+<pre>Wireless LAN adapter Wi-Fi:
+   Connection-specific DNS Suffix  . :
+   IPv4 Address. . . . . . . . . . . : 192.168.1.5
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.1.1</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>I am using a cheap WiFi adapter that I got on Amazon for $10. I
+originally bought it for my Raspberry Pi, but it works great on
+Windows 10 and the connection to the THETA is solid. I have the WiFi
+adapter less than a foot from my THETA for testing. There are many WiFi
+adapters at the $10 price point. If you&#8217;re going
+to develop apps for the THETA, it&#8217;s a good investment.</p>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="../img/network/wifi_dongle.png" alt="wifi dongle">
+</div>
+<div class="title">Figure 1. Example of a cheap WiFi adapter on Amazon.com that I use on RPi and Win 10</div>
+</div>
+<div class="paragraph">
+<p>From the Windows 10 machine, I can connect to both the THETA and the
+Internet. If I power the THETA from a 1.5A power source such as a
+portable battery or wall socket, I can test the THETA for long periods.</p>
+</div>
+<div class="paragraph">
+<p>As I normally work within a Linux VirtualBox VM running on a Windows 10
+host, I set the VirtualBox Network Adapter with a single NAT adapter. With this
+configuration, I can access both the Internet and the THETA
+from within the guest VM.</p>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="../img/tools/dev_environment.png" alt="dev environment">
+</div>
+<div class="title">Figure 2. Accessing the THETA and Internet Simultaneously</div>
+</div>
+<div class="paragraph">
+<p>Inside of the Linux VM, I am getting good Internet access to GitHub over the
+Internet and to the THETA, which I can test using <code>curl</code>.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>After you import the library, you can use the commands like this:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>That will return the state of the camera, which is great to
-get the sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>You can also get the sessionId when you start a new session:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>In fact, the startSession() function will return the
-sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of the library with Pygame to detect the
-button press.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if event.type == pygame.MOUSEBUTTONDOWN:
-    mouse_pos = pygame.mouse.get_pos()
-    if pictureButton.collidepoint(mouse_pos):
-        sid = startSession()
-        takePicture(sid)
-    if captureStartButton.collidepoint(mouse_pos):
-        sid = startSession()
-        startCapture(sid)
-    if captureStopButton.collidepoint(mouse_pos):
-        stopCapture(sid)</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of library from the command line:</pre>
+<pre>ricoh@odapolis: $ ping theta360developers.github.io
+PING github.map.fastly.net (185.31.19.133) 56(84) bytes of data.
+64 bytes from 185.31.19.133: icmp_seq=1 ttl=52 time=161 ms
+64 bytes from 185.31.19.133: icmp_seq=2 ttl=52 time=161 ms
+^C
+--- github.map.fastly.net ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 161.515/161.688/161.862/0.437 ms</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>if sys.argv[1] == "startCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py startCapture SID_000X")
-        print("Use 'state' to get sessionId")</pre>
+<pre>ricoh@odapolis: $ curl http://192.168.1.1/osc/info
+{"manufacturer":"RICOH","model":"RICOH THETA S","serialNumber":"00001221",
+"firmwareVersion":"01.30",
+"supportUrl":"https://theta360.com/en/support/",
+"endpoints":{"httpPort":80,"httpUpdatesPort":80},
+"gps":false,"gyro":false,"uptime":226,
+"api":["/osc/info",
+"/osc/state",
+"/osc/checkForUpdates",
+"/osc/commands/execute",
+"/osc/commands/status"]}</pre>
 </div>
 </div>
-<div class="literalblock">
+</div>
+<div class="sect2">
+<h3 id="_mobile_phone">Mobile Phone</h3>
+<div class="paragraph">
+<p>You need to manually change the WiFi connection. If you&#8217;re using
+Android, we&#8217;ve heard that you can use your application to
+change the WiFi connection from the phone to the Internet. Here&#8217;s a discussion
+on
+<a href="http://stackoverflow.com/questions/8818290/how-to-connect-to-a-specific-wifi-network-in-android-programmatically">StackOverflow</a>
+about this. I have not tried to implement anything myself. If you build
+an application that switches the WiFi connection from the THETA to the
+Internet, send me a code snippet and I&#8217;ll put it in our repository.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_raspberry_pi_and_windows_tablet">Raspberry Pi and Windows Tablet</h3>
+<div class="paragraph">
+<p>If you&#8217;d like to build a standalone hardware device to give to real estate
+agents or used car marketers, you can put two Wifi adapters on Raspberry Pi
+or plug a WiFi adapter into the USB port of your tablet.</p>
+</div>
+<div class="paragraph">
+<p>This is a picture of a self-contained Raspberry Pi unit powered by a
+rechargeable battery.</p>
+</div>
+<div class="imageblock thumb">
 <div class="content">
-<pre>    else:
-        sid = sys.argv[2]
-        response = startCapture(sid)
-        pprint.pprint(response)
-elif sys.argv[1] == "stopCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py stopCapture SID_000X")
-        print("Use 'state' to get sessionId")
-    else:
-        sid = sys.argv[2]
-        response = stopCapture(sid)
-        pprint.pprint(response)</pre>
+<img src="../img/rpi/rpi_box.png" alt="rpi box">
 </div>
+<div class="title">Figure 3. Prototype used car marketing unit with dual WiFi and battery power</div>
 </div>
-<hr>
-<div class="literalblock">
+<div class="paragraph">
+<p>The Raspberry Pi is completely portable and can connect to the Internet and the
+THETA at the same time. The interface is a touchscreen.</p>
+</div>
+<div class="imageblock thumb">
 <div class="content">
-<pre>Functions</pre>
+<img src="../img/rpi/rpi_front.png" alt="rpi front">
 </div>
+<div class="title">Figure 4. Touchscreen for Raspberry Pi and THETA</div>
 </div>
-<div class="literalblock">
+<div class="paragraph">
+<p>This is an updated version of the system with a
+RPi touch interface built with Pygame.</p>
+</div>
+<div class="imageblock thumb">
 <div class="content">
-<pre>getImage(fileUri, imageType='image')
-    Transfer the file from the camera to computer and save the
-    binary data to local storage.  This works, but is clunky.
-    There are easier ways to do this. The __type parameter
-    can be set to "thumb" for a thumbnail or "image" for the
-    full-size image.  The default is "image".</pre>
+<img src="../img/rpi/driver_eye.png" alt="driver eye">
 </div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>info()
-    Get basic information ont he camera.  Note that this is a GET call
-    and not a POST.  Most of the calls are POST.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>latestFileUri()
-    This will only work if you've just taken a picture.  The state
-    will include the attribute latestFileUri.  You need this to
-    transfer the file from the camera to your computer or phone.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>listAll(entryCount=3, detail=False, sortType='newest')
-    entryCount:
-            Integer     No. of still images and video files
-                        to be acquired
-    detail:
-            Boolean     (Optional)  Whether or not file details are
-                        acquired true is acquired by default.
-                        Only values that can be acquired
-                        when false is specified are "name", "uri",
-                        "size" and "dateTime"
-    sort:
-            String      (Optional) Specify the sort order
-                        newest (dateTime descending order)/ oldest
-                        (dateTime ascending order)
-                        Default is newest</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>request(url_request)
-    Generate the URI to send to the THETA S.  The THETA IP address is
-    192.168.1.1
-    All calls start with /osc/</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startCapture(sid)
-    Begin video capture if the captureMode is _video.  If the
-    captureMode is set to image, the camera will take multiple
-    still images.  The captureMode can be set in the options.
-    Note that this will not work with streaming video using the
-    HDMI or USB cable.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()
-    Start a new session.  Grab the sessionId number and
-    return it.
-    You'll need the sessionId to take a video or image.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()
-    Get the state of the camera, which will include the sessionsId and also the
-    latestFileUri if you've just taken a picture.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>stopCapture(sid)
-    Stop video capture.  If in image mode, will stop
-    automatic image taking.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>takePicture(sid)
-    Take a still image.  The sessionId is either taken from
-    startSession or from state.  You can change the mode
-    from video to image with captureMode in the options.</pre>
+<div class="title">Figure 5. DriverEye - Used Car Marketing System Prototype</div>
 </div>
 </div>
 </div>
@@ -970,7 +927,7 @@ elif sys.argv[1] == "stopCapture":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-07-09 15:55:11 PDT
+Last updated 2016-07-09 16:13:42 PDT
 </div>
 </div>
 </body>
