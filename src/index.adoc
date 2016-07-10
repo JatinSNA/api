@@ -1,10 +1,5 @@
-= http://theta360.guide[Unofficial Guides]
-:icons: font
-:toc: right
-:toclevels: 1
-:toc-title: Contents
-:sectnums:
 
+= http://theta360.guide[Unofficial Guides]
 
 ++++
 <script>
@@ -22,43 +17,28 @@ ga('set', 'contentGroup1', 'All RICOH');
 image::../img/api_guide_logo.png[THETA DEVELOPERS UNOFFICIAL API GUIDE]
 
 
-Send comments and corrections to <ricohtheta360@oppkey.com>
+Send comments and corrections to <info@theta360.guide>
 
 This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
 
 == http://theta360.guide/contest/[$45,000 THETA Dev Contest]
 
-include::resources.adoc[]
-
-include::testCommands.adoc[]
-
-include::take_picture.adoc[]
-
-include::testingWorkflow.adoc[]
-
-include::python_tests.adoc[]
-
-include::python_desktop.adoc[]
-
-include::transfer.adoc[]
-
-include::javascript.adoc[]
-
-include::otherLang.adoc[]
-
-include::rpi.adoc[]
-
-include::hardware.adoc[]
-
-include::network.adoc[]
-
-include::usb.adoc[]
-
-include::resources.adoc[]
-
-include::hackathon_tips.adoc[]
-
-include::thetapylib.adoc[]
-
-include::nextsteps.adoc[]
+++++
+<ol>
+<li><a href='testCommands.html'>Test Commands From Computer to Camera</a></li>
+<li><a href='take_picture.html'>Taking Pictures</a></li>
+<li><a href='testingWorkflow.html'>Testing Workflow Using a HTTP Browser Tool</a></li>
+<li><a href='python_tests.html'>Python</a></li>
+<li><a href='javascript.html'>JavaScript</a></li>
+<li><a href='otherLang.html'>Other Languages</a></li>
+<li><a href='rpi.html'>Raspberry Pi</a></li>
+<li><a href='hardware.html'>Other Hardware</a></li>
+<li><a href='network.html'>Network</a></li>
+<li><a href='usb.html'>Using the THETA API Over USB</a></li>
+<li><a href='resources.html'>Additional Resources</a></li>
+<li><a href='hackathon_tips.html'>Before You Hack</a></li>
+<li><a href='thetapylib.html'>thetapylib</a></li>
+<li><a href='nextsteps.html'>Next Steps</a></li>
+</ol>
+++++
